@@ -15,4 +15,4 @@ jobs:
       - name: install node
         uses: actions/setup-node@v4
       - run: npm --prefix To-Do-App/app ci
-      - run: npm test
+      - run: npm --prefix To-Do-App/app test
