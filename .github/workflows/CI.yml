@@ -7,12 +7,12 @@ on:
         branches: ["develop"]
 
 jobs:
-    build:
-        runs-on: ubuntu:latest
+  build:
+    runs-on: ubuntu:latest
     steps:
-        - name: download project
+      - name: download project
         uses: actions/checkout@v4
-        - name: install node
+      - name: install node
         uses: actions/setup-node@v4
-        - run: npm ci
-        - run: npm test
+      - run: npm ci
+      - run: npm test
