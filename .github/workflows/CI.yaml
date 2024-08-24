@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+    name: test
     runs-on: ubuntu-latest
     steps:
       - name: download project
@@ -18,7 +19,6 @@ jobs:
         working-directory: To-Do-App/app
       - run: yarn test
         working-directory: To-Do-App/app
-      #- run: yarn node --prefix To-Do-App/app ci
-      #- run: yarn node --prefix To-Do-App/app test
+
 
       
