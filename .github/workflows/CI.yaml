@@ -16,8 +16,8 @@ jobs:
         uses: actions/setup-node@v4
       - run: yarn install
         #working-directory: To-Do-App/app
-      - run: yarn ./To-Do-App/app test
-        #working-directory: To-Do-App/app
+      - run: yarn test
+        working-directory: To-Do-App/app
       #- run: yarn node --prefix To-Do-App/app ci
       #- run: yarn node --prefix To-Do-App/app test
 
