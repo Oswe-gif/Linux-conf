@@ -23,6 +23,7 @@ test('it stores item correctly', async () => {
 
     const expectedItem = { id, name, completed: false };
 
+
     expect(db.storeItem.mock.calls.length).toBe(1);
     expect(db.storeItem.mock.calls[0][0]).toEqual(expectedItem);
     expect(res.send.mock.calls[0].length).toBe(1);
