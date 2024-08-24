@@ -1,0 +1,19 @@
+name: CI
+
+on:
+    pull_request:
+        branches: ["main", "develop"]
+    push:
+        branches: ["develop", "main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: download project
+        uses: actions/checkout@v4
+      - name: install node
+        uses: actions/setup-node@v4
+      - run: yarn node --prefix To-Do-App/app ci
+      - run: yarn node --prefix To-Do-App/app test
+      
