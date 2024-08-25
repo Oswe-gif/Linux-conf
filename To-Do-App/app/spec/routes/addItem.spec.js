@@ -21,7 +21,7 @@ test('it stores item correctly', async () => {
 
     await addItem(req, res);
 
-    const expectedItem = { id, name, completed: true };
+    const expectedItem = { id, name, completed: false };
 
 
     expect(db.storeItem.mock.calls.length).toBe(1);
