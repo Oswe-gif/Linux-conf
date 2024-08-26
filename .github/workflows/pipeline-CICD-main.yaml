@@ -29,9 +29,10 @@ jobs:
         run: docker build --no-cache -t oswe/to-do-app:latest -f ./To-Do-App/app/Dockerfile ./To-Do-App/app/
       - name: Push the Docker image latest
         run: docker push oswe/to-do-app:latest
-        
+
   CD-main:
     name: CD-main
+    if: ${{ github.event.action }} == 'opened'
     runs-on: self-hosted
     steps:
         - name: download the image
