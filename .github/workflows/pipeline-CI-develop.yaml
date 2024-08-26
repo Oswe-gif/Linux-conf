@@ -1,0 +1,32 @@
+name: CI-develop
+
+on:
+    pull_request:
+        branches: ["develop"]
+    push:
+        branches: ["develop"]
+
+jobs:
+  CI-develop:
+    name: CI-develop
+    runs-on: ubuntu-latest
+    steps:
+      - name: download project
+        uses: actions/checkout@v4
+      - name: install node
+        uses: actions/setup-node@v4
+      - run: yarn install
+        working-directory: To-Do-App/app
+      - run: yarn test
+        working-directory: To-Do-App/app
+      - name: Log in
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      - name: Build the docker image
+        run: docker build --no-cache -t oswe/to-do-app-develop:${{ secrets.MAJOR_DEVELOP }}.${{ secrets.MINOR_DEVELOP }} -f ./To-Do-App/app/Dockerfile ./To-Do-App/app/
+      - name: Push the Docker image
+        run: docker push oswe/to-do-app-develop:${{ secrets.MAJOR_DEVELOP }}.${{ secrets.MINOR_DEVELOP }}
+      - name: Build the docker image latest
+        run: docker build --no-cache -t oswe/to-do-app-develop:latest -f ./To-Do-App/app/Dockerfile ./To-Do-App/app/
+      - name: Push the Docker image latest
+        run: docker push oswe/to-do-app-develop:latest
+      
