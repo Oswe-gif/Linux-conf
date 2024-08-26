@@ -22,7 +22,7 @@ jobs:
       - name: Log in
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
       - name: Build the docker image
-        run: docker build --no-cache -t oswe/to-do-app:${{ secrets.MAJOR }}.${{ secrets.MINOR }} -f ./To-Do-App/app/Dockerfile .
+        run: docker build --no-cache -t oswe/to-do-app:${{ secrets.MAJOR }}.${{ secrets.MINOR }} -f ./To-Do-App/app/Dockerfile ./To-Do-App/app/
       - name: Push the Docker image
         run: docker push oswe/to-do-app:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
       
