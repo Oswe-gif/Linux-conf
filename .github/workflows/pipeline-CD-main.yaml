@@ -1,0 +1,20 @@
+name: CD-main
+
+on:
+    pull_request:
+        branches: ["main"]
+    push:
+        branches: ["main"]
+
+jobs:
+  CD-main:
+    name: CD-main
+    runs-on: self-hosted
+    steps:
+      - name: download the image
+        run: sudo docker pull oswe/to-do-app:latest
+      - name: stop containers
+        run: sudo docker stop $(sudo docker ps -a -q)
+      - name: run the container
+        run: sudo docker run -d -p 3000:3000 oswe/to-do-app:latest
+      
