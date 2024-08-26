@@ -25,4 +25,8 @@ jobs:
         run: docker build --no-cache -t oswe/to-do-app:${{ secrets.MAJOR }}.${{ secrets.MINOR }} -f ./To-Do-App/app/Dockerfile ./To-Do-App/app/
       - name: Push the Docker image
         run: docker push oswe/to-do-app:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
+      - name: Build the docker image latest
+        run: docker build --no-cache -t oswe/to-do-app:latest -f ./To-Do-App/app/Dockerfile ./To-Do-App/app/
+      - name: Push the Docker image latest
+        run: docker push oswe/to-do-app:latest
       
