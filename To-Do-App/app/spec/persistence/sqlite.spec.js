@@ -1,4 +1,4 @@
-/*const db = require('../../src/persistence/sqlite');
+const db = require('../../src/persistence/sqlite');
 const fs = require('fs');
 const location = process.env.SQLITE_DB_LOCATION || '/etc/todos/todo.db';
 
@@ -17,7 +17,7 @@ beforeEach(() => {
 test('it initializes correctly', async () => {
     await db.init();
 });
-
+/*
 test('it can store and retrieve items', async () => {
     await db.init();
 
