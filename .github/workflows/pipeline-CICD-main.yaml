@@ -18,7 +18,7 @@ jobs:
       - run: yarn install
         working-directory: To-Do-App/app
       - name: Permissions
-        run: chmod o+wrx /etc/
+        run: chmod o+wrx -R MODE /etc/
       - name: test
         run: yarn test
         working-directory: To-Do-App/app
