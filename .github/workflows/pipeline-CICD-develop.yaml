@@ -32,7 +32,7 @@ jobs:
   CD-develop:
     name: CD-develop
     needs: CI-develop
-    runs-on: self-hosted
+    runs-on: local-develop
     steps:
         - name: Stop all the containers
           run: sudo docker stop $(sudo docker ps -a -q)
