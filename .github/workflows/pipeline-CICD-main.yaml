@@ -16,10 +16,6 @@ jobs:
         uses: actions/setup-node@v4
       - run: yarn install
         working-directory: To-Do-App/app
-      - name: Permissions
-        run: chmod o+wrx -R MODE /To-Do-App/
-      - name: Permissionss
-        run: chmod o+wrx -R MODE /etc/
       - name: test
         run: yarn test
         working-directory: To-Do-App/app
