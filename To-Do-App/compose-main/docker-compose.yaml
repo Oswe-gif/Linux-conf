@@ -1,6 +1,6 @@
 services:
         app-notes:
-                image: oswe/to-do-app-develop:latest
+                image: oswe/to-do-app:latest
                 #container_name: app-notes
                 #build:
                 #        context: ./app
