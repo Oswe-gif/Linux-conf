@@ -34,10 +34,16 @@ jobs:
     needs: CI-develop
     runs-on: self-hosted
     steps:
+        - name: Stop all containers
+          run: sudo docker compose down
+          working-directory: To-Do-App/compose-develop
         - name: download the image
           run: sudo docker pull oswe/to-do-app-develop:latest
-        - name: stop containers
-          run: sudo docker stop $(sudo docker ps -a -q)
-        - name: run the container
-          run: sudo docker run -d -p 3000:3000 oswe/to-do-app-develop:latest
+        - name: Run app
+          run: sudo docker compose up
+          working-directory: To-Do-App/compose-develop
+        #- name: stop containers
+        #  run: sudo docker stop $(sudo docker ps -a -q)
+        #- name: run the container
+        #  run: sudo docker run -d -p 3000:3000 oswe/to-do-app-develop:latest
                 
