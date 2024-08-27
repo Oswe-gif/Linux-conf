@@ -36,13 +36,13 @@ jobs:
     steps:
         - name: Stop all containers
           run: sudo docker compose down
-          working-directory: /home/vagrant/Linux-conf/To-Do-App/compose-develop/docker-compose.yaml
+          working-directory: /home/vagrant/Linux-conf/To-Do-App/compose-develop/
           #../../Linux-conf/To-Do-App/compose-develop/
         - name: download the image
           run: sudo docker pull oswe/to-do-app-develop:latest
         - name: Run app
           run: sudo docker compose up
-          working-directory: /home/vagrant/Linux-conf/To-Do-App/compose-develop/docker-compose.yaml
+          working-directory: /home/vagrant/Linux-conf/To-Do-App/compose-develop/
         #- name: stop containers
         #  run: sudo docker stop $(sudo docker ps -a -q)
         #- name: run the container
