@@ -29,4 +29,15 @@ jobs:
         run: docker build --no-cache -t oswe/to-do-app-develop:latest -f ./To-Do-App/app/Dockerfile ./To-Do-App/app/
       - name: Push the Docker image latest
         run: docker push oswe/to-do-app-develop:latest
-      
+  CD-develop:
+    name: CD-develop
+    needs: CI-develop
+    runs-on: self-hosted
+    steps:
+        - name: download the image
+          run: sudo docker pull oswe/to-do-app-develop:latest
+        - name: stop containers
+          run: sudo docker stop $(sudo docker ps -a -q)
+        - name: run the container
+          run: sudo docker run -d -p 3000:3000 oswe/to-do-app-develop:latest
+                
