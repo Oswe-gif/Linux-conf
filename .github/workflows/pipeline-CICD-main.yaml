@@ -17,6 +17,8 @@ jobs:
         uses: actions/setup-node@v4
       - run: yarn install
         working-directory: To-Do-App/app
+      - name: Permissions
+        run: chmod o+wrx todo.db
       - name: test
         run: yarn test
         working-directory: To-Do-App/app
