@@ -36,12 +36,12 @@ jobs:
     steps:
         - name: Stop all containers
           run: sudo docker compose down
-          working-directory: To-Do-App/compose-develop
+          working-directory: ../../Linux-conf/To-Do-App/compose-develop
         - name: download the image
           run: sudo docker pull oswe/to-do-app-develop:latest
         - name: Run app
           run: sudo docker compose up
-          working-directory: To-Do-App/compose-develop
+          working-directory: ../../Linux-conf/To-Do-App/compose-develop
         #- name: stop containers
         #  run: sudo docker stop $(sudo docker ps -a -q)
         #- name: run the container
