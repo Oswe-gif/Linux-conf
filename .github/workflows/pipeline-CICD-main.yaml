@@ -14,8 +14,6 @@ jobs:
         uses: actions/checkout@v4
       - name: install node
         uses: actions/setup-node@v4
-      - name: BD
-        uses: actions/setup-sqlite@v1
       - run: yarn install
         working-directory: To-Do-App/app
       - name: test
@@ -34,6 +32,7 @@ jobs:
 
   CD-main:
     name: CD-main
+    needs: CI-main
     runs-on: self-hosted
     steps:
         - name: download the image
