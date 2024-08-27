@@ -5,7 +5,9 @@ on:
         branches: ["develop"]
     push:
         branches: ["develop"]
-
+env:
+  MAJOR: '1'
+  MINOR: "0.0"
 jobs:
   CI-develop:
     name: CI-develop
@@ -22,9 +24,9 @@ jobs:
       - name: Log in
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
       - name: Build the docker image
-        run: docker build --no-cache -t oswe/to-do-app-develop:${{ secrets.MAJOR_DEVELOP }}.${{ secrets.MINOR_DEVELOP }} -f ./To-Do-App/app/Dockerfile ./To-Do-App/app/
+        run: docker build --no-cache -t oswe/to-do-app-develop:${MAJOR}.${MINOR} -f ./To-Do-App/app/Dockerfile ./To-Do-App/app/
       - name: Push the Docker image
-        run: docker push oswe/to-do-app-develop:${{ secrets.MAJOR_DEVELOP }}.${{ secrets.MINOR_DEVELOP }}
+        run: docker push oswe/to-do-app-develop:${MAJOR}.${MINOR}
       - name: Build the docker image latest
         run: docker build --no-cache -t oswe/to-do-app-develop:latest -f ./To-Do-App/app/Dockerfile ./To-Do-App/app/
       - name: Push the Docker image latest
