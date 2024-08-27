@@ -41,7 +41,7 @@ jobs:
         - name: download the image
           run: sudo docker pull oswe/to-do-app-develop:latest
         - name: Run app
-          run: sudo docker compose up
+          run: sudo docker compose up -d
           working-directory: /home/vagrant/Linux-conf/To-Do-App/compose-develop/
         #- name: stop containers
         #  run: sudo docker stop $(sudo docker ps -a -q)
