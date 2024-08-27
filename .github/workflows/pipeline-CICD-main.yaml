@@ -17,7 +17,8 @@ jobs:
         uses: actions/setup-node@v4
       - run: yarn install
         working-directory: To-Do-App/app
-      - run: yarn test
+      - name: test
+        run: yarn test
         working-directory: To-Do-App/app
       - name: Log in
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
@@ -29,7 +30,7 @@ jobs:
         run: docker build --no-cache -t oswe/to-do-app:latest -f ./To-Do-App/app/Dockerfile ./To-Do-App/app/
       - name: Push the Docker image latest
         run: docker push oswe/to-do-app:latest
-        
+
   CD-main:
     name: CD-main
     runs-on: self-hosted
