@@ -33,12 +33,12 @@ jobs:
   CD-main:
     name: CD-main
     needs: CI-main
-    runs-on: Linux
+    runs-on: local-main
     steps:
       - name: Stop all the containers
-        run: sudo docker stop $(docker ps -a -q)
+        run: sudo docker stop $(sudo docker ps -a -q)
       - name: Remove all the containers
-        run: sudo docker rm $(docker ps -a -q)
+        run: sudo docker rm $(sudo docker ps -a -q)
       - name: download the image
         run: sudo docker pull oswe/to-do-app:latest
       - name: Run app
