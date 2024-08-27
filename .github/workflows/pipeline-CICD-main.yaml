@@ -33,7 +33,7 @@ jobs:
   CD-main:
     name: CD-main
     needs: CI-main
-    runs-on: self-hosted
+    runs-on: Linux
     steps:
       - name: Stop all the containers
         run: sudo docker stop $(docker ps -a -q)
