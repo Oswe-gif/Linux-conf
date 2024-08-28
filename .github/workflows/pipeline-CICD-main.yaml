@@ -43,16 +43,18 @@ jobs:
     steps:
       #- name: permissions
         #run: sudo chmod 666 /var/run/docker.sock
+      - name: download the image
+        run: docker pull oswe/to-do-app:latest
       - name: Stop all the containers
         run: docker ps -q | xargs -r docker stop
         #run: docker stop $(docker ps -a -q)
       - name: Remove all the containers
         run: docker ps -a -q | xargs -r docker rm
-      - name: Remove all the images
-        run: docker images -q | xargs -r docker rmi
-      - name: download the image
-        run: docker pull oswe/to-do-app:latest
       - name: Run app
         run: docker compose up -d
         working-directory: /home/vagrant/Linux-conf/To-Do-App/compose-main/
+      - name: Remove all the images
+        run: docker images -q | grep -v -e $(docker images -q --filter "reference=oswe/to-do-app:latest") -e $(docker images -q --filter "reference=nginx:latest") | xargs -r docker rmi
+
+
       
