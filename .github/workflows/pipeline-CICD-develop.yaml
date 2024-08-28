@@ -13,9 +13,9 @@ jobs:
     name: CI-develop
     runs-on: ubuntu-latest
     steps:
-      #- name: permissions
+      - name: permissions
         #run: chmod o+rwx /etc/
-        #run: sudo chmod -R 7 /etc/
+        run: chmod -R 7 /etc/
       - name: download project
         uses: actions/checkout@v4
       - name: install node
