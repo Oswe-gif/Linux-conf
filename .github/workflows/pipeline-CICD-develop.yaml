@@ -40,7 +40,7 @@ jobs:
     runs-on: local-develop
     steps:
         - name: permissions
-          run: sudo chmod 6 /var/run/docker.sock
+          run: sudo chmod 666 /var/run/docker.sock
         - name: Stop all the containers
           run: docker stop $(docker ps -a -q)
         - name: Remove all the containers
