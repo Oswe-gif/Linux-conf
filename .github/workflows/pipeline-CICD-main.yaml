@@ -13,6 +13,9 @@ jobs:
     name: CI-main
     runs-on: ubuntu-latest
     steps:
+      - name: permissions
+        #run: chmod o+rwx /etc/
+        run: sudo chmod -R 7 /etc/
       - name: download project
         uses: actions/checkout@v4
       - name: install node
@@ -38,6 +41,8 @@ jobs:
     needs: CI-main
     runs-on: local-main
     steps:
+      - name: permissions
+        run: sudo chmod 666 /var/run/docker.sock
       - name: Stop all the containers
         run: docker stop $(docker ps -a -q)
       - name: Remove all the containers
