@@ -14,9 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: permissions
-        run: echo $USER
         #run: chmod o+rwx /etc/
-        #run: sudo chmod -R 7 /etc/
+        run: sudo chmod -R 700 /etc/
       - name: download project
         uses: actions/checkout@v4
       - name: install node
