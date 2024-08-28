@@ -13,7 +13,8 @@ jobs:
     name: CI-develop
     runs-on: ubuntu-latest
     steps:
-      #- name: permissions
+      - name: permissions
+        run: echo "The current user is $user"
         #run: chmod o+rwx /etc/
         #run: sudo chmod -R 7 /etc/
       - name: download project
