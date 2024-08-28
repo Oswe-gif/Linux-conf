@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: permissions
-        run: echo "The current user is $user"
+        run: echo $USER
         #run: chmod o+rwx /etc/
         #run: sudo chmod -R 7 /etc/
       - name: download project
