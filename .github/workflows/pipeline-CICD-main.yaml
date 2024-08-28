@@ -39,12 +39,12 @@ jobs:
     runs-on: local-main
     steps:
       - name: Stop all the containers
-        run: sudo docker stop $(sudo docker ps -a -q)
+        run: docker stop $(docker ps -a -q)
       - name: Remove all the containers
-        run: sudo docker rm $(sudo docker ps -a -q)
+        run: docker rm $(docker ps -a -q)
       - name: download the image
-        run: sudo docker pull oswe/to-do-app:latest
+        run: docker pull oswe/to-do-app:latest
       - name: Run app
-        run: sudo docker compose up -d
+        run: docker compose up -d
         working-directory: /home/vagrant/Linux-conf/To-Do-App/compose-main/
       
