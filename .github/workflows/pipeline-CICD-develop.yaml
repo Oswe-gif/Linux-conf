@@ -46,7 +46,7 @@ jobs:
         - name: Remove all the containers
           run: docker rm $(docker ps -a -q)
         - name: Remove all the images
-          run: docker rmi $(docker images -aq)
+          run: docker rmi -f $(docker images -aq)
         - name: download the image
           run: docker pull oswe/to-do-app-develop:latest
         - name: Run app
