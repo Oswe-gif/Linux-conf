@@ -1,6 +1,6 @@
 const db = require('../../src/persistence/sqlite');
 const fs = require('fs');
-const location = process.env.SQLITE_DB_LOCATION || '/etc/todos/todo.db';
+const location = process.env.SQLITE_DB_LOCATION || '/home/vagrant/Linux-conf/To-Do-App/todo.db';
 
 const ITEM = {
     id: '7aef3d7c-d301-4846-8358-2a91ec9d6be3',

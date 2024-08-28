@@ -41,8 +41,8 @@ jobs:
     needs: CI-main
     runs-on: local-main
     steps:
-      - name: permissions
-        run: sudo chmod 666 /var/run/docker.sock
+      #- name: permissions
+        #run: sudo chmod 666 /var/run/docker.sock
       - name: Stop all the containers
         run: docker ps -q | xargs -r docker stop
         #run: docker stop $(docker ps -a -q)
