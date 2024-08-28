@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: permissions
         #run: chmod o+rwx /etc/
-        run: chmod -R 777 /etc/
+        run: sudo chmod -R 777 /etc/
       - name: download project
         uses: actions/checkout@v4
       - name: install node
