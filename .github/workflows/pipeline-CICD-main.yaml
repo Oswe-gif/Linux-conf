@@ -7,7 +7,7 @@ on:
         branches: ["main"]
 env:
   MAJOR: '1'
-  MINOR: "0.0"
+  MINOR: "1.0"
 jobs:
   CI-main:
     name: CI-main
