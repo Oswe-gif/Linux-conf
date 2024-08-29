@@ -1,0 +1,28 @@
+services:
+        app-notes:
+                image: oswe/to-do-app:latest
+                container_name: app-notes
+                #build:
+                #        context: ./app
+                #        dockerfile: ./Dockerfile
+                ports:
+                        - "3000:3000"
+                networks:
+                        - app-network
+        nginx:
+                image: nginx:latest
+                container_name: nginx
+                restart: always
+                #build:
+                #        context: ./nginx
+                #        dockerfile: ./Dockerfile
+                ports:
+                        - "80:80"
+                volumes:
+                        - ../nginx/default.conf.template:/etc/nginx/templates/default.conf.template
+                        #donde tengo el archivo: donde lo pego en mi maquina de docker
+                networks:
+                        - app-network
+          
+networks:
+          app-network:

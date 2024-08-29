@@ -1,9 +1,10 @@
 services:
         app-notes:
+                image: oswe/to-do-app-develop:latest
                 container_name: app-notes
-                build:
-                        context: ./app
-                        dockerfile: ./Dockerfile
+                #build:
+                #        context: ./app
+                #        dockerfile: ./Dockerfile
                 ports:
                         - "3000:3000"
                 networks:
@@ -18,7 +19,7 @@ services:
                 ports:
                         - "80:80"
                 volumes:
-                        - ./nginx/default.conf.template:/etc/nginx/templates/default.conf.template
+                        - ../nginx/default.conf.template:/etc/nginx/templates/default.conf.template
                         #donde tengo el archivo: donde lo pego en mi maquina de docker
                 networks:
                         - app-network

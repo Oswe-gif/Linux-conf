@@ -1,0 +1,60 @@
+name: CD-main
+
+on:
+    pull_request:
+        branches: ["main"]
+    push:
+        branches: ["main"]
+env:
+  MAJOR: '1'
+  MINOR: "0.0"
+jobs:
+  CI-main:
+    name: CI-main
+    runs-on: ubuntu-latest
+    steps:
+      - name: permissions
+        #run: chmod o+rwx /etc/
+        run: sudo chmod -R 7 /etc/
+      - name: download project
+        uses: actions/checkout@v4
+      - name: install node
+        uses: actions/setup-node@v4
+      - run: yarn install
+        working-directory: To-Do-App/app
+      - name: test
+        run: yarn test
+        working-directory: To-Do-App/app
+      - name: Log in
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      - name: Build the docker image
+        run: docker build --no-cache -t oswe/to-do-app:${MAJOR}.${MINOR} -t oswe/to-do-app:latest -f ./To-Do-App/app/Dockerfile ./To-Do-App/app/
+      - name: Push the Docker image
+        run: docker push oswe/to-do-app:${MAJOR}.${MINOR}
+      #- name: Build the docker image latest
+      #  run: docker build --no-cache -t oswe/to-do-app:latest -f ./To-Do-App/app/Dockerfile ./To-Do-App/app/
+      - name: Push the Docker image latest
+        run: docker push oswe/to-do-app:latest
+
+  CD-main:
+    name: CD-main
+    needs: CI-main
+    runs-on: local-main
+    steps:
+      #- name: permissions
+        #run: sudo chmod 666 /var/run/docker.sock
+      - name: download the image
+        run: docker pull oswe/to-do-app:latest
+      - name: Stop all the containers
+        run: docker ps -q | xargs -r docker stop
+        #run: docker stop $(docker ps -a -q)
+      - name: Remove all the containers
+        run: docker ps -a -q | xargs -r docker rm
+      - name: Run app
+        run: docker compose up -d
+        working-directory: /home/vagrant/Linux-conf/To-Do-App/compose-main/
+      - name: Remove all the images
+        run: docker images -q | grep -v -e $(docker images -q --filter "reference=oswe/to-do-app:latest") -e $(docker images -q --filter "reference=nginx:latest") | xargs -r docker rmi
+
+
+      

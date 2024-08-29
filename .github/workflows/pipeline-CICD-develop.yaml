@@ -1,0 +1,63 @@
+name: CI-develop
+
+on:
+    pull_request:
+        branches: ["develop"]
+    push:
+        branches: ["develop"]
+env:
+  MAJOR: '1'
+  MINOR: "0.1"
+jobs:
+  CI-develop:
+    name: CI-develop
+    runs-on: ubuntu-latest
+    steps:
+      - name: permissions
+        #run: chmod o+rwx /etc/
+        run: sudo chmod -R 7 /etc/
+      - name: download project
+        uses: actions/checkout@v4
+      - name: install node
+        uses: actions/setup-node@v4
+      - run: yarn install
+        working-directory: To-Do-App/app
+      - run: yarn test
+        working-directory: To-Do-App/app
+      - name: Log in
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      - name: Build the docker image
+        run: docker build --no-cache -t oswe/to-do-app-develop:${MAJOR}.${MINOR} -t oswe/to-do-app-develop:latest -f ./To-Do-App/app/Dockerfile ./To-Do-App/app/
+      - name: Push the Docker image
+        run: docker push oswe/to-do-app-develop:${MAJOR}.${MINOR}
+      #- name: Build the docker image latest
+      #  run: docker build --no-cache -t oswe/to-do-app-develop:latest -f ./To-Do-App/app/Dockerfile ./To-Do-App/app/
+      - name: Push the Docker image latest
+        run: docker push oswe/to-do-app-develop:latest
+  CD-develop:
+    name: CD-develop
+    needs: CI-develop
+    runs-on: local-develop
+    steps:
+        #- name: permissions
+        #  run: sudo chmod 666 /var/run/docker.sock
+        - name: download the image
+          run: docker pull oswe/to-do-app-develop:latest
+        - name: Stop all the containers
+          run: docker ps -q | xargs -r docker stop
+        - name: Remove all the containers
+          run: docker ps -a -q | xargs -r docker rm
+        - name: Run app
+          run: docker compose up -d
+          working-directory: /home/vagrant/Linux-conf/To-Do-App/compose-develop/
+        - name: Remove all the images
+          run: docker images -q | grep -v -e $(docker images -q --filter "reference=oswe/to-do-app-develop:latest") -e $(docker images -q --filter "reference=nginx:latest") | xargs -r docker rmi
+        #  run: docker images -q | xargs -r docker rmi
+        #- name: download the image
+        #  run: docker pull oswe/to-do-app-develop:latest
+
+        #- name: stop containers
+        #  run: sudo docker stop $(sudo docker ps -a -q)
+        #- name: run the container
+        #  run: sudo docker run -d -p 3000:3000 oswe/to-do-app-develop:latest
+                
