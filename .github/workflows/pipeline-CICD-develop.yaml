@@ -39,8 +39,8 @@ jobs:
     needs: CI-develop
     runs-on: local-develop
     steps:
-        - name: permissions
-          run: sudo chmod 666 /var/run/docker.sock
+        #- name: permissions
+        #  run: sudo chmod 666 /var/run/docker.sock
         - name: download the image
           run: docker pull oswe/to-do-app-develop:latest
         - name: Stop all the containers
