@@ -6,8 +6,8 @@ on:
     push:
         branches: ["main"]
 env:
-  MAJOR: '1'
-  MINOR: "2.1"
+  MAJOR: '2'
+  MINOR: "0.0"
 jobs:
   CI-main:
     name: CI-main
@@ -41,8 +41,8 @@ jobs:
     needs: CI-main
     runs-on: local-main
     steps:
-      #- name: permissions
-        #run: sudo chmod 666 /var/run/docker.sock
+      - name: permissions
+        run: sudo chmod 666 /var/run/docker.sock
       - name: download the image
         run: docker pull oswe/to-do-app:latest
       - name: Stop all the containers
